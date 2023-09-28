@@ -50,7 +50,7 @@ python train.py --config configs/flow_refine/pfc_raft_flow_mask.py --mode refine
 Notes: To reproduce the results in our paper, the first three steps can be skipped by accessing the pretrained model weights from [here](https://drive.google.com/drive/folders/1j5joP1MSOJWrp1W28v86M9rxPQLS_iBm) and initial pose of unlabeled real images from [here](https://drive.google.com/drive/folders/1U33pwPyZNtw_zYc9P1O4PEnad_9TaYMj). 
 
 # Testing
-1. Inference the initial poses on testing images, and save them.
+1. Infer the initial poses on testing images, and save them.
 ```shell
 python test.py --config configs/estimator/extended_wdr.py --checkpoint work_dirs/wdr_ycbv_pbr/latest.pth --format-only --save-dir data/initial_poses/extended_wdr/ycbv_pbr_test
 ```
