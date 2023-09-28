@@ -1,0 +1,38 @@
+CLASS_NAMES= ('ape', 'benchvise', 'bowl', 'cam', 'can', 
+            'cat','cup', 'driller', 'duck', 'eggbox', 
+            'glue', 'holepuncher', 'iron', 'lamp', 'phone')
+
+
+symmetry_types = { # 1-base
+    'cls_10': {'x':180, 'y':180, 'z':180},
+    'cls_11': {'z':180},
+}
+
+camera_K = [572.4114, 0, 325.2611, 0, 573.57043, 242.04899, 0, 0, 1]
+mesh_diameter = [
+    102.099, 247.506, 167.355, 172.492, 201.404, 
+    154.546, 124.264, 261.472, 108.999, 164.628, 
+    175.889, 145.543, 278.078, 282.601, 212.358]
+
+
+dataset_root = 'data/lmo'
+dataset=dict(
+    data_root=dataset_root + '/test',
+    gt_annots_root=dataset_root + '/test',
+    image_list=dataset_root + '/image_lists/test_bop19.txt',
+    keypoints_json='data/lm/keypoints/bbox_13obj.json',
+    class_names=CLASS_NAMES,
+    keypoints_num=8,
+    mesh_symmetry=symmetry_types,
+    meshes_eval='data/lm/models_eval',
+    mesh_diameter=mesh_diameter,
+)
+
+evaluation=dict(
+    auc=[],
+    add=[0.05, 0.1, 0.2, 0.5, 0.99],
+    rotation=[5],
+    translation=[1, 2],
+    depth=[1, 2, 3],
+    trans_xy=[1, 2, 3]
+)
