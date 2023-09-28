@@ -35,8 +35,7 @@ RAFT_context_encoder_cfg = dict(
 
 init_cfg = dict(
     type='Pretrained',
-    checkpoint='work_dirs/flow_workdirs/ycbv/raft_ycbv_flow_mask_pbr_normaug_d50_filter20_bs32_grad1_200k/iter_200000.pth',
-    # checkpoint='work_dirs/flow_workdirs/raft_lm_flow_mask_pbr_normaug_d50_filter20_grad1_100k/iter_100000.pth'
+    checkpoint='work_dirs/raft_ycbv_pbr/latest.pth',
 )
 
 
@@ -113,20 +112,6 @@ model = dict(
             )
         ),
     ),
-    # photometric_loss_cfg=dict(
-    #     type='SequenceLoss',
-    #     gamma=0.8,
-    #     loss_func_cfg=dict(
-    #         type='LABSpaceLoss',
-    #         loss_weight=0.1,
-    #         with_L=False,
-    #     )
-    # ),
-    # render_augmentations=[
-    #     dict(type='RandomHSV', h_ratio=0.2, s_ratio=0.5, v_ratio=0.5, p=0.3),
-    #     dict(type='RandomNoise', noise_ratio=0.1, p=0.3),
-    #     dict(type='RandomSmooth', max_kernel_size=5.0, p=0.3),
-    # ],
     train_cfg=dict(),
     test_cfg=dict(
         iters=24,

@@ -24,13 +24,13 @@
 2. Install Pytorch3D by building [this code repo](https://github.com/YangHai-1218/pytorch3d) from source.
 3. Install [bop_toolkit](https://github.com/thodan/bop_toolkit)(Optional).
 
-
 # Dataset Preparation
 1. Download [BOP YCB-V Dataset](https://bop.felk.cvut.cz/datasets/), and place them under `data` directory.
-2. Download the image lists and other data related to YCB-V, which will be used in this code, from [here]().
+2. Download the image lists and other data related to YCB-V, which will be used in this code, from [here](https://drive.google.com/drive/folders/19ReFWdW6Ly_9epHgtOpmeTNtePFWkAhe).
+3. Download the detected bounding boxes by [RADet](http://arxiv.org/abs/2303.12396), from [here](https://drive.google.com/drive/folders/18hBP70Gveh5todH1zrxP37ASa_c9NYUO).
 
 # Training
-1. Train the pose initialization network, which is WDR-Pose equipped with the detection pre-processing, on synthetic images.
+1. Train the pose initialization network, which is WDR-Pose equipped with RADet pre-processing, on synthetic images.
 ```shell
 python train.py --config configs/estimator/extended_wdr.py --mode estimator
 ```
@@ -42,15 +42,14 @@ python train.py --config configs/flow_refine/raft_flow_mask.py --mode refiner
 ```shell
 python test.py --config configs/estimator/extended_wdr.py --mode estimator --checkpoint work_dirs/wdr_ycbv_pbr/latest.pth --format-only --save-dir data/initial_poses/extended_wdr/ycbv_pbr_train
 ```
-1. Train the optical flow network on un-annotated real images, which will load the pretrained weights and use the above initial poses for training.
+4. Train the optical flow network on un-annotated real images, which will load the pretrained weights and use the above initial poses for training.
 ```shell
 python train.py --config configs/flow_refine/pfc_raft_flow_mask.py --mode refiner
 ```
-Notes: To reproduce the results in our paper, the first three steps can be skiped by accessing the pretrained model weights from [here](https://drive.google.com/drive/folders/1j5joP1MSOJWrp1W28v86M9rxPQLS_iBm) and initial pose of unlabeled real images from [here](https://drive.google.com/drive/folders/1U33pwPyZNtw_zYc9P1O4PEnad_9TaYMj). 
+Notes: To reproduce the results in our paper, the first three steps can be skipped by accessing the pretrained model weights from [here](https://drive.google.com/drive/folders/1j5joP1MSOJWrp1W28v86M9rxPQLS_iBm) and initial pose of unlabeled real images from [here](https://drive.google.com/drive/folders/1U33pwPyZNtw_zYc9P1O4PEnad_9TaYMj). 
 
 # Testing
 1. Inference the initial poses on testing images, and save them.
-
 ```shell
 python test.py --config configs/estimator/extended_wdr.py --checkpoint work_dirs/wdr_ycbv_pbr/latest.pth --format-only --save-dir data/initial_poses/extended_wdr/ycbv_pbr_test
 ```
@@ -60,7 +59,6 @@ python test.py --config configs/flow_refine/pfc_raft_flow_mask.py --checkpoint w
 ```
 Notes: The trained model on YCB-V can be found [here](https://drive.google.com/drive/folders/1j5joP1MSOJWrp1W28v86M9rxPQLS_iBm) and initial pose for testing images can be found [here](https://drive.google.com/drive/folders/1U33pwPyZNtw_zYc9P1O4PEnad_9TaYMj).
 ## Evaluation under BOP setting(optional)
-
 1. Save the results.
 ```shell
 python test.py --config configs/flow_refine/pfc_raft_flow_mask.py --checkpoint work_dirs/pfc_real_selfsup/latest.pth --format-only --save-dir work_dirs/pfc_real_seflsup/results
@@ -72,7 +70,6 @@ python tools/convert_to_bop19.py work_dirs/pfc_real_seflsup/results data/ycbv/te
 3. Follow the bop_toolkit instruction for evaluation. 
 # Citation
 If you find this project is helpful, please cite:
-
  ```
  @inproceedings{yang2023pfcflow,
    title={Pseudo Flow Consistency for Self-Supervised 6D Object Pose Estimatio},
@@ -93,6 +90,5 @@ If you find this project is helpful, please cite:
    year={2022}
  }
  ```
-
 # Acknowledgement
 We thank the authors of [WDR-Pose](https://github.com/cvlab-epfl/wide-depth-range-pose) and [SCFlow](https://github.com/YangHai-1218/SCFlow) for their great code repositories.

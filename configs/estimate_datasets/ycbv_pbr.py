@@ -38,19 +38,15 @@ train_pipeline = [
         clip_border=False,
         pad_val=128,
     ),
-    # dict(type='RandomBackground', background_dir='data/coco', p=0.3, file_client_args=file_client_args),
-    # dict(type='CosyPoseAug', p=0.8,
-    #     pipelines=[
-    #         dict(type='PillowBlur', p=1., factor_interval=(1, 3)),
-    #         dict(type='PillowSharpness', p=0.3, factor_interval=(0., 50.)),
-    #         dict(type='PillowContrast', p=0.3, factor_interval=(0.2, 50.)),
-    #         dict(type='PillowBrightness', p=0.5, factor_interval=(0.1, 6.0)),
-    #         dict(type='PillowColor', p=0.3, factor_interval=(0., 20.)),
-    # ]),
     dict(type='RandomBackground', background_dir='data/coco', p=0.3, file_client_args=file_client_args),
-    dict(type='RandomHSV', h_ratio=0.2, s_ratio=0.5, v_ratio=0.5),
-    dict(type='RandomNoise', noise_ratio=0.1),
-    dict(type='RandomSmooth', max_kernel_size=5.),
+    dict(type='CosyPoseAug', p=0.8,
+        pipelines=[
+            dict(type='PillowBlur', p=1., factor_interval=(1, 3)),
+            dict(type='PillowSharpness', p=0.3, factor_interval=(0., 50.)),
+            dict(type='PillowContrast', p=0.3, factor_interval=(0.2, 50.)),
+            dict(type='PillowBrightness', p=0.5, factor_interval=(0.1, 6.0)),
+            dict(type='PillowColor', p=0.3, factor_interval=(0., 20.)),
+    ]),
     dict(type='Resize', img_scale=image_scale, keep_ratio=True),
     dict(type='Pad', 
         size=(image_scale, image_scale), 
@@ -98,28 +94,6 @@ test_pipeline = [
     ),
 ]
 
-# TTA_pipeline = [
-#     dict(type='LoadImages', color_type='unchanged', file_client_args=file_client_args),
-#     dict(type='MultiScaleAug',
-#         scales=[0.9, 1., 1.1],
-#         transforms=[
-#             dict(type='Crop', crop_bbox_field='ref_bboxes', clip_border=False, pad_val=128),
-#             dict(type='Resize', img_scale=image_scale, keep_ratio=True),
-#             dict(type='Pad', size=(image_scale, image_scale), center=True, pad_val=dict(img=(128, 128, 128), mask=0)),
-#             dict(type='RemapPose', keep_intrinsic=False),
-#             dict(type='Normalize', mean=normalize_mean, std=normalize_std, to_rgb=True),
-#         ]),
-#     dict(type='ToTensor', stack_keys=[], ),
-#     dict(type='Collect', 
-#         annot_keys=[
-#             'labels', 'k', 'ref_keypoints_3d', 'transform_matrix', 'ori_k',
-#         ],
-#         meta_keys=(
-#             'img_path', 'ori_shape', 'img_shape', 'img_norm_cfg', 'padding',
-#             'scale_factor', 'geometry_transform_mode'),
-#     ),
-# ]
-
 
 data = dict(
     samples_per_gpu=32,
@@ -142,7 +116,7 @@ data = dict(
     val=dict(
         type='EstimationDataset',
         data_root=dataset_root + '/test',
-        ref_bboxes_root='data/reference_bboxes/beyondcenterv2_pbr_ycbv',
+        ref_bboxes_root='data/reference_bboxes/radet_ycbv_pbr',
         image_list=dataset_root + '/image_lists/test_bop19.txt',
         keypoints_json=dataset_root + f'/keypoints/{keypoint}.json',
         pipeline=test_pipeline,
@@ -154,9 +128,9 @@ data = dict(
     ),
     test=dict(
         type='EstimationDataset',
-        data_root=dataset_root + '/test',
-        ref_bboxes_root='data/reference_bboxes/beyondcenterv2_ycbv_pbr',
-        image_list=dataset_root + '/image_lists/test_bop19.txt',
+        data_root=dataset_root + '/train_real',
+        ref_bboxes_root='data/reference_bboxes/radet_ycbv_pbr_train',
+        image_list=dataset_root + '/image_lists/test.txt',
         keypoints_json=dataset_root + f'/keypoints/{keypoint}.json',
         pipeline=test_pipeline,
         class_names=CLASS_NAMES,

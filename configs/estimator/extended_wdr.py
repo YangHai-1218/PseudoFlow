@@ -111,12 +111,18 @@ lr_config = dict(
     pct_start=0.05,
     anneal_strategy='linear')
 
-evaluation=dict(
-    interval=interval, 
-    metric={'bop':[]},
-    save_best='AR',
-    rule='greater',
-)
+evaluation=dict(interval=steps, 
+                metric={
+                    'auc':[],
+                    'add':[0.05, 0.10, 0.20, 0.50],
+                    'rotation':[5],
+                    'translation':[1, 2],
+                    'depth':[1, 2],
+                    'trans_xy':[1, 2]
+                    },
+                save_best='average/add_10',
+                rule='greater',
+            )
 
 runner = dict(type='IterBasedRunner', max_iters=steps)
 num_gpus = 1
