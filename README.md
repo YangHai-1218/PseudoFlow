@@ -39,7 +39,7 @@ python train.py --config configs/estimator/extended_wdr.py --mode estimator
 ```shell
 python train.py --config configs/flow_refine/raft_flow_mask.py --mode refiner
 ```
-3. Inference the initial poses of un-annotated real training images.
+3. Infer the initial poses of un-annotated real training images.
 ```shell
 python test.py --config configs/estimator/extended_wdr.py --mode estimator --checkpoint work_dirs/wdr_ycbv_pbr/latest.pth --format-only --save-dir data/initial_poses/extended_wdr/ycbv_pbr_train
 ```
