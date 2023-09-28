@@ -19,6 +19,7 @@
 <figcaption align = "center"><b>Figure 2. Method overview. </b> We first obtain the initial pose based on a pose estimation network trained only on synthetic images, and then train our refinement framework on real images without any annotations. Our proposed framework is based on a teacher-student learning scheme. Given a rough pose initialization, we render multiple synthetic images around this initial pose, and create multiple image pairs between the synthetic and real images. We dynamically produce pixel-level flow supervision signals for the student network during the training, by leveraging the geometry-guided flow consistency between those image pairs from different views. After getting 3D-to-2D correspondences based on the predicted flow, we use a PnP solver to get the final pose.
  </figcaption>
 </figure>
+
 # Installation
 1. Install necessary packages by `pip install -r requirements.txt`
 2. Install Pytorch3D by building [this code repo](https://github.com/YangHai-1218/pytorch3d) from source.
