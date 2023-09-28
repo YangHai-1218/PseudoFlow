@@ -19,8 +19,6 @@
 <figcaption align = "center"><b>Figure 2. Method overview. </b> We first obtain the initial pose based on a pose estimation network trained only on synthetic images, and then train our refinement framework on real images without any annotations. Our proposed framework is based on a teacher-student learning scheme. Given a rough pose initialization, we render multiple synthetic images around this initial pose, and create multiple image pairs between the synthetic and real images. We dynamically produce pixel-level flow supervision signals for the student network during the training, by leveraging the geometry-guided flow consistency between those image pairs from different views. After getting 3D-to-2D correspondences based on the predicted flow, we use a PnP solver to get the final pose.
  </figcaption>
 </figure>
-
-
 # Installation
 1. Install necessary packages by `pip install -r requirements.txt`
 2. Install Pytorch3D by building [this code repo](https://github.com/YangHai-1218/pytorch3d) from source.
@@ -52,6 +50,7 @@ Notes: To reproduce the results in our paper, the first three steps can be skipe
 
 # Testing
 1. Inference the initial poses on testing images, and save them.
+
 ```shell
 python test.py --config configs/estimator/extended_wdr.py --checkpoint work_dirs/wdr_ycbv_pbr/latest.pth --format-only --save-dir data/initial_poses/extended_wdr/ycbv_pbr_test
 ```
@@ -59,17 +58,18 @@ python test.py --config configs/estimator/extended_wdr.py --checkpoint work_dirs
 ```shell
 python test.py --config configs/flow_refine/pfc_raft_flow_mask.py --checkpoint work_dirs/pfc_real_selfsup/latest.pth --eval
 ```
-3. Evaluate under BOP setting(Optional).
-   1. Save the results.
+Notes: The trained model on YCB-V can be found [here](https://drive.google.com/drive/folders/1j5joP1MSOJWrp1W28v86M9rxPQLS_iBm) and initial pose for testing images can be found [here](https://drive.google.com/drive/folders/1U33pwPyZNtw_zYc9P1O4PEnad_9TaYMj).
+## Evaluation under BOP setting(optional)
+
+1. Save the results.
 ```shell
 python test.py --config configs/flow_refine/pfc_raft_flow_mask.py --checkpoint work_dirs/pfc_real_selfsup/latest.pth --format-only --save-dir work_dirs/pfc_real_seflsup/results
 ```
-​		2. Convert to BOP format.
+2. Convert to BOP format.
 ```shell
 python tools/convert_to_bop19.py work_dirs/pfc_real_seflsup/results data/ycbv/test_targets_bop19.json work_dirs/pfc_real_seflsup/results_bop19.json
 ```
-​		3. Follow the bop_toolkit instruction for evaluation. 
-Notes: The trained model on YCB-V can be found [here](https://drive.google.com/drive/folders/1j5joP1MSOJWrp1W28v86M9rxPQLS_iBm) and initial pose for testing images can be found [here](https://drive.google.com/drive/folders/1U33pwPyZNtw_zYc9P1O4PEnad_9TaYMj).
+3. Follow the bop_toolkit instruction for evaluation. 
 # Citation
 If you find this project is helpful, please cite:
 
