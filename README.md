@@ -78,9 +78,15 @@ If you find this project is helpful, please cite:
    booktitle={ICCV},
    year={2023}
  }
- @inproceedings{yang2023pfcflow,
+ @inproceedings{yang2023radet,
    title={Rigidity-Aware Detection for 6D Object Pose Estimation},
    author={Yang Hai and Rui Song and Jiaojiao Li and Mathieu Salzmann and Yinlin Hu},
+   booktitle={CVPR},
+   year={2023}
+ }
+ @inproceedings{yang2023scflow,
+   title={Shape-Constraint Recurrent Flow for 6D Object Pose Estimation},
+   author={Yang Hai and Rui Song and Jiaojiao Li and Yinlin Hu},
    booktitle={CVPR},
    year={2023}
  }
@@ -91,5 +97,5 @@ If you find this project is helpful, please cite:
    year={2022}
  }
  ```
-# Acknowledgement
-We thank the authors of [WDR-Pose](https://github.com/cvlab-epfl/wide-depth-range-pose) and [SCFlow](https://github.com/YangHai-1218/SCFlow) for their great code repositories.
+# Notes
+Some parts of the code are based on [WDR-Pose](https://github.com/cvlab-epfl/wide-depth-range-pose) and [SCFlow](https://github.com/YangHai-1218/SCFlow).
