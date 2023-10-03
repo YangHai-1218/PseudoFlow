@@ -1,4 +1,5 @@
 <h1 align="center"> Pseudo Flow Consistency for Self-Supervised 6D Object Pose Estimation </h1>
+<h2 align="center"> ICCV 2023 </h2>
 
 <h5 align="center"><a href="https://yanghai-1218.github.io">Yang Hai</a>, Rui Song, Jiaojiao Li, David Ferstl, <a href="https://yinlinhu.github.io">Yinlin Hu</a></h5>
 
