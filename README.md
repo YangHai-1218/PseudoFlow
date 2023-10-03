@@ -9,6 +9,7 @@
 </p>
 
 # Introduction
+Most self-supervised 6D object pose estimation methods can only work with additional depth information or rely on the accurate annotation of 2D segmentation masks, limiting their application range. In this paper, we propose a 6D ob- ject pose estimation method that can be trained with pure RGB images without any auxiliary information.
 <figure>
 <img src="resources/motivation.png">
 <figcaption align = "center"><b>Figure 1. Self-supervised strategies in different fields. </b>(a) Teacher-student learning scheme is a classical framework for self-supervised classification. The key is how to determine the quality of pseudo labels from the noisy prediction of the teacher network. For image classification, one can obtain the prediction quality by the output distribution after the softmax operation easily, which is usually implemented by checking if the probability of any class is above a threshold. (b) However, there is no such easy way to determine the quality of an object pose prediction without the ground truth. We propose to formulate pseudo object pose labels as pixel-level optical flow supervision signals, and then use the flow consistency between multiple views based on their underlying geometry constraint.
