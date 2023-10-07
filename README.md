@@ -74,8 +74,8 @@ python tools/convert_to_bop19.py work_dirs/pfc_real_seflsup/results data/ycbv/te
 # Citation
 If you find this project is helpful, please cite:
  ```
- @inproceedings{yang2023pfcflow,
-   title={Pseudo Flow Consistency for Self-Supervised 6D Object Pose Estimatio},
+ @inproceedings{yang2023pseudoflow,
+   title={Pseudo Flow Consistency for Self-Supervised 6D Object Pose Estimation},
    author={Yang Hai and Rui Song and Jiaojiao Li and David Ferstl and Yinlin Hu},
    booktitle={ICCV},
    year={2023}
